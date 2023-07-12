@@ -1,0 +1,415 @@
+#Company      :: Copyright Althafnash@coopration 
+#Created by   :: Mohammed Althaf
+#Langauge     :: Phython
+
+def calculator() :
+    # borders
+    print("------------------------------------------------------------")
+    #   The calculator get two user input and then add them togther and display the answer
+    print("\n" + "Calculator")
+    FristNumber  = input( " Enter Frist number : ")
+    SecondNumber  = input(" Enter Sceond number : ")
+    print("\n" + "Answer")
+    print(int(FristNumber) + int(SecondNumber))
+    print("------------------------------------------------------------")
+
+def guess():
+    # A guess game 
+    # The answer here is the number we should Guess (you can change it) you eill get three tries (you can change it also)
+    answer = 7
+    guess_count   = 0
+    guess_limit   = 3
+    print("------------------------------------------------------------")
+    # When the Number of gusees is not equal to this while loop will run
+    while   guess_count < guess_limit:
+        # User input us taken 
+        # you also have a clue
+        print("CLUE :It is a number between 1-10")
+        Guess = int(input("Your_Guses: "))
+        # Add one to the count 
+        guess_count += 1
+        # if the guess is equal to the number then it will print you won
+        if Guess == answer:
+            print("You_Won")
+            break
+    else:
+        # or else if you did not guess the number this will run
+        print("You_Falied")
+    print("------------------------------------------------------------")
+
+def weight(): 
+    # weight conveter
+    # converts kg  to pounds / pounds to kg
+    print("------------------------------------------------------------")
+    # Users weight 
+    weight = int(input("weight: "))
+    # Ask if to convert to killos or pounds
+    unit = input("(L)bs or (k)g: ")
+    # if user input is equal to pounds it will convert to kilos and print the result 
+    if unit.upper() == "L":
+        converted = weight * 0.45
+        print(f"You are {converted} (k)g")
+    else:
+        # if user input is equal to killos it will convert to kilos an dprints the result 
+        converted = weight / 0.45
+        print(f"You are {converted} (L)bs")
+    print("------------------------------------------------------------")
+
+def game_center():
+    # This is where you acces althafnash games 
+    command = ""
+    while command != "quit":
+        print("\n" + "Type get-commands to list all the commands ")
+        command = input(">>TYPE Game name : ").lower()
+        # help
+        if command == "games":
+            print("""
+                "Guess    :: Guess the number game   "
+            """)
+        elif command == "guess":
+            # guess game 
+            guess()
+        elif command == "quit":   
+            break 
+    else :
+        print("no game found")   
+
+from tkinter import *
+from tkinter.filedialog import asksaveasfilename, askopenfilename
+import subprocess 
+
+def IDE():
+
+    IDE = Tk()
+
+    file_path = ""
+
+    def set_file_path(path):
+        global file_path
+        file_path = path
+
+    def open_file():
+        path = askopenfilename(filetypes=[("Python Files", "*.py")])
+        with open(path , 'r') as file:
+            code = file.read()
+            editor.delete("1.0" , END)
+            editor.insert("1.0" , code)
+            set_file_path(path)  
+
+    def save_as():
+        if file_path == '':
+            path = asksaveasfilename(filetypes=[("Python Files", "*.py")])
+        else:
+            path = file_path
+        with open(path , "w") as file:
+            code = editor.get("1.0" , END)
+            file.write(code)
+            set_file_path(path)
+
+    def run():
+        if file_path ==  '':
+            save_prompt = Toplevel()
+            text = Label(save_prompt , text="plesae save the file ")
+            text.pack()
+            return
+        command = f'Python {file_path}'
+        process = subprocess.Popen(command, stdout=subprocess.PIPE ,stderr=subprocess.PIPE , shell=True)
+        output , error = process.communicate()
+        code_output.insert('1.0', output)
+        code_output.insert('1.0', error)
+
+    menu_bar = Menu(IDE)
+
+    run_bar = Menu(menu_bar , tearoff=0)
+    run_bar.add_command(label="Run" , command=run)
+    menu_bar.add_cascade(label="Run" , menu=run_bar)
+    IDE.config(menu=menu_bar)
+
+    file_bar = Menu(menu_bar , tearoff=0)
+    file_bar.add_command(label="save" , command=save_as)
+    file_bar.add_command(label="open" , command=open_file)
+    file_bar.add_command(label="save as" , command=save_as)
+    file_bar.add_command(label="Exit" , command=exit)
+    menu_bar.add_cascade(label="File" , menu=file_bar)
+    IDE.config(menu=menu_bar)
+
+    IDE.title("NashIDE")
+    editor = Text(bg="blue" , fg="red")
+    editor.pack()
+
+    code_output = Text(height=10 , bg="black" , fg="lightgreen")
+    code_output.pack()
+
+    IDE.mainloop()
+
+
+def cli():
+    import tkinter as tk
+    import tkinter.ttk as ttk
+    from time import strftime
+
+    root = tk.Tk()
+    root.title("clock")
+
+    def time():
+        string = strftime('%H:%M:%S %p')
+        lable.config(text=string)
+        lable.after(1000,time)
+
+    lable = tk.Label(root ,font=("ds-digital", 80) , bg="black" ,fg="lightgreen" )
+    lable.pack(anchor="center")
+    time()
+
+    root.mainloop()
+
+def gui():
+    # Help center
+    # import the tkinter module
+    import tkinter as tk
+    def runos():
+        # Help
+        cwd = """
+        welcome to althafnash helpcenter 
+
+        # Acces all games via the game_center type game
+
+        How to play the Guessing game 
+        # You have to gusee a number 
+        # You only got 3 attempts to try 
+
+        weight convertor 
+        # This converts weight in killograms to pounds or pounds to killograms
+        # Frist type your weight 
+        # Then select the unit 
+
+        pwd            
+        #current working folder
+
+        cd             
+        #change folder
+
+        mkdir          
+        #make folder
+
+        rmdir          
+        #remove folder
+
+         """
+        # this is where the text is going to go 
+        lable = tk.Label(window2 , text=cwd , bg="black" ,fg="green" )
+        lable.pack()
+
+        #window.geometry("350x200")
+
+        #lable.grid(coloum = "10" , row = "20")
+    # intilaaize the tkinter module 
+    root = tk.Tk()
+    
+    # TC hange the tittle 
+    root.title("Help-center")
+    
+    # Propties of the main window 
+    window = tk.Canvas(root , height="800",width="800",bg="white",)
+    window.pack()
+    
+    # this is like an html div this is khown as fraame 
+    # Frame an dit s propeties
+    window2 = tk.Frame(root , bg="black")
+    window2.place(relwidth="0.8",relheight="0.8",relx="0.1",rely="0.1")
+
+    # Button
+    button = tk.Button(root , text="HELP" , padx="10",pady="10",bg="red",command=runos)
+    button.pack()
+
+    # end of the program 
+    root.mainloop
+
+# impot the os module
+import os
+
+# give the current working folder
+def pwd():
+    cwd = os.getcwd()
+    print("\n " +  cwd)
+
+# changes from one folder to another
+def cd():
+    path = input("\n "+ "Path : ")
+    os.chdir(path)
+
+# take user input for the name of the new folder and then it makes a folder
+# if no path is give t creates a new folder in the current working folder
+def mkdir():
+    path = input("\n " + "Enter full path to make folder (go to help to see more) : ")
+    os.mkdir(path)
+
+# take user input for the path of the folder which the user wants to remave and then it removes it  a folder
+def rmdir():
+    path = input("\n " + "Enter full path to remove folder (go to help to see more) : ")
+    os.rmdir(path)
+
+
+print("------------------------Minecraft_App(ignore)--------------------------------------")
+from ursina import *
+from ursina.prefabs.first_person_controller import FirstPersonController
+def Minecraft():
+     # bulid useing the code in github/ursina
+     # press w,a,s,d to mave
+     # left click to create a cube
+     # right click to destroy a cube
+
+
+    print("--------------------------------------------------------------")
+    print("YOU CAN PRTICE MINECRAF HERE")
+    print("bulid useing the code in github/ursina")
+    print("left click to create a cube")
+    print("left click to create a cube")
+    print("right click to destroy a cube")
+    print("CRAETED BY MOHAMMED ALTHAF")
+    print("IF YOU WANT TO EXIT PRESS CTR+SHIFT+Q")
+    print("----------------------------------------------------------------")
+    app = Ursina()
+
+    class Voxel(Button):
+        def __init__(self, position=(0,0,0)):
+            super().__init__(
+                parent = scene,
+                position = position,
+                model = 'cube',
+                origin_y = .6,
+                texture = 'white_cube',
+                color = color.white,
+                highlight_color = color.blue,
+            )
+
+
+        def input(self, key):
+            if self.hovered:
+                if key == 'left mouse down':
+                    voxel = Voxel(position=self.position + mouse.normal)
+
+                if key == 'right mouse down':
+                    destroy(self)
+
+
+    for z in range(20):
+        for x in range(20):
+            voxel = Voxel(position=(x,0,z))
+
+
+    player = FirstPersonController()
+    app.run()
+
+print("------------------------IGRNORE THIS THING S***T--------------------------------------")
+
+import cv2
+import winsound
+
+def face():
+    cam = cv2.VideoCapture(0) 
+    while cam.isOpened(): 
+        ret, frame1 = cam.read() 
+        ret, frame2 = cam.read()
+
+        width = int(cam.get(3))
+        height = int(cam.get(4))
+
+        font = cv2.FONT_HERSHEY_SIMPLEX  
+        line = cv2.putText(frame1,"Althaf_Nash_Face_Detector",(10 , height - 10), font , 1 ,  (0,0,255),5 , cv2.LINE_AA)
+
+        diff = cv2.absdiff(frame1,frame2)
+        gray = cv2.cvtColor(diff,cv2.COLOR_RGB2GRAY)
+        blur = cv2.GaussianBlur(gray , (5,5) , 0 )
+        _ , tresh = cv2.threshold(blur ,29 ,255 , cv2.THRESH_BINARY)
+        dialated = cv2.dilate(tresh ,None , iterations=3)
+        contorus , _ = cv2.findContours(dialated , cv2.RETR_TREE , cv2.CHAIN_APPROX_SIMPLE )
+        #cv2.drawContours(frame1 , contorus , -1 , (0 , 0 , 225) , 2)
+        for c in contorus:
+            if cv2.contourArea(c)  < 5000:
+                continue
+            x,y,h,w = cv2.boundingRect(c)
+            cv2.rectangle(frame1 , (x,y),(x+w ,y+h),(0 , 0 , 225) , 2)
+            winsound.Beep(500,200)
+        if cv2.waitKey(10) ==  ord('q'):
+            break
+        cv2.imshow('Face_Detector',frame1) 
+
+face()
+
+import socket 
+import threading
+
+def server():
+    PORT = 5050
+    SERVER = socket.gethostbyname(socket.gethostname())
+    ADDR = (SERVER, PORT)
+    HEADER = 64
+    DISCONNECT_MESSAGE = "!DISCONECTED"
+    print(f"[HOST : {SERVER} ]")
+    FORMAT= "utf-8"
+
+    server = socket.socket(socket.AF_INET , socket.SOCK_STREAM )
+    server.bind(ADDR)
+
+    def handel_client(conn ,addr):
+        print(f"[NEW CONNECTION] {addr} connected")
+
+        connected =True
+        while connected:
+            msg_lenght = conn.recv(HEADER).decode(FORMAT)
+            if msg_lenght:
+                msg_lenght = int(msg_lenght)
+                msg = conn.recv(msg_lenght).decode(FORMAT)
+                if msg == DISCONNECT_MESSAGE:
+                    connected = False
+
+                print(f"[{addr}] [{msg}]")
+
+        conn.close()
+
+    def start():
+        server.listen()
+        while True :
+            conn ,addr = server.accept()
+            thread = threading.Thread(target=handel_client , args=(conn,addr))
+            thread.start()
+            print(f"[ACTIVE CCONECTION]:{threading.activeCount() -1}")
+
+    print("[NASH SERVER] starting nash server")
+    start()
+
+server()
+
+import socket 
+import threading
+
+def client():
+    PORT = 5050
+    SERVER = socket.gethostbyname(socket.gethostname())
+    ADDR = (SERVER, PORT)
+    HEADER = 64
+    DISCONNECT_MESSAGE = "!DISCONECTED"
+    print(f"[CLIENT : {SERVER} ]")
+    FORMAT= "utf-8"
+    server = "192.168.137.1"
+
+    client = socket.socket(socket.AF_INET , socket.SOCK_STREAM )
+    client.connect(ADDR)
+
+    def send(msg):
+        message  = msg.encode(FORMAT)
+        msg_lenght = len(message)
+        send_lenght = str(msg_lenght).encode(FORMAT)
+        send_lenght += b''* (HEADER -  len(send_lenght))
+        client.send(send_lenght)
+        client.send(message)
+
+    inputw = input("TYPE")
+    send(inputw)
+
+client()
+
+def talk(text):
+    speak = pyttsx3.init()
+    speak.say(text)
+    speak.runAndWait()
