@@ -51,4 +51,3 @@ def Minecraft():
 
 print("------------------------IGRNORE THIS THING S***T--------------------------------------")
 
-Minecraft()

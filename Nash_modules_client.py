@@ -25,4 +25,3 @@ def client():
     inputw = input("TYPE")
     send(inputw)
 
-client()

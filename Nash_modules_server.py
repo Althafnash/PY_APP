@@ -40,4 +40,3 @@ def server():
     print("[NASH SERVER] starting nash server")
     start()
 
-server()

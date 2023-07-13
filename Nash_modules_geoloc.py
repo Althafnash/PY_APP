@@ -12,4 +12,3 @@ def geo():
     print("\n")
     print(result)
 
-geo()

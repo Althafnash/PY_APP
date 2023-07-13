@@ -1,5 +1,5 @@
 from time import strftime
-from Nash_modules_calculator.py import calculator
+from Nash_module_calculator import calculator
 
 
 calculator()

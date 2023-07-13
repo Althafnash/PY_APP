@@ -30,4 +30,3 @@ def face():
             break
         cv2.imshow('Face_Detector',frame1) 
 
-face()

@@ -9,4 +9,3 @@ def calculator() :
     print(int(FristNumber) + int(SecondNumber))
     print("------------------------------------------------------------")
 
-calculator()
