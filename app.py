@@ -7,6 +7,9 @@ from Nash_modules_guess import guess
 from Nash_modules_minecraft import Minecraft
 from Nash_modules_server import server
 from Nash_modules_webcam import face
+from Nash_modules_clock.py import clock
+from Nash_modules_weight.py import weight
+from Nash_modules_IDE.py import IDE
 
 string = strftime('%H:%M %p')
 talk("welcome back sir " + "the time is " + string )
@@ -31,3 +34,9 @@ elif command == "4":
         guess()
 elif command == "5":
         Minecraft()
+elif command == "6":
+        clock()
+elif command == "7":
+        weight()
+elif command == "8":
+        weight()
