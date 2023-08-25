@@ -26,6 +26,7 @@ def face():
             x,y,h,w = cv2.boundingRect(c)
             cv2.rectangle(frame1 , (x,y),(x+w ,y+h),(0 , 0 , 225) , 2)
             winsound.Beep(500,200)
+            print("Located")
         if cv2.waitKey(10) ==  ord('q'):
             break
         cv2.imshow('Face_Detector',frame1) 

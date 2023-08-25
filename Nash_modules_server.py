@@ -38,5 +38,6 @@ def server():
             print(f"[ACTIVE CCONECTION]:{threading.activeCount() -1}")
 
     print("[NASH SERVER] starting nash server")
+    print("Open another CMD and run script again and then type 3.1 instead of 3")
     start()
 

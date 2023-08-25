@@ -1,3 +1,7 @@
+import tkinter as tk
+import tkinter.ttk as ttk
+from time import strftime
+
 def Clock():
 
     root = tk.Tk()
