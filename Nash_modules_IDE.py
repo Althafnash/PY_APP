@@ -1,6 +1,9 @@
+import tkinter.ttk as ttk
+from tkinter import *
+import tkinter as tk
 def IDE():
 
-    IDE = Tk()
+    IDE = ttk()
 
     file_path = ""
 

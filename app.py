@@ -10,6 +10,7 @@ from Nash_modules_webcam import face
 from Nash_modules_clock import Clock
 from Nash_modules_weight import weight
 from Nash_modules_IDE import IDE
+from Nash_module_image_opener import opener 
 
 
 
@@ -26,6 +27,7 @@ print("""
         6   -   Clock
         7   -   Weight convertor
         8   -   IDE
+        9   -   Image opener
 """)
 command = input("What do you want to see ")
 if command == "1":
@@ -46,3 +48,5 @@ elif command == "7":
         weight()
 elif command == "8":
         IDE()
+elif command == "9":
+        opener()
