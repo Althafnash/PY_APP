@@ -11,7 +11,8 @@ from Nash_modules_clock import Clock
 from Nash_modules_weight import weight
 from Nash_modules_IDE import IDE
 from Nash_module_image_opener import opener 
-
+from Nash_module_Bandwidth import Bandwidth
+from Nash_modules_scrapper import Scrapper
 
 
 string = strftime('%H:%M %p')
@@ -28,6 +29,8 @@ print("""
         7   -   Weight convertor
         8   -   IDE
         9   -   Image opener
+       10   -   Network Bandwidth
+       11   -   We Scrapper
 """)
 command = input("What do you want to see ")
 if command == "1":
@@ -50,3 +53,7 @@ elif command == "8":
         IDE()
 elif command == "9":
         opener()
+elif command == "10":
+        Bandwidth()
+elif command == "11":
+        Scrapper()
