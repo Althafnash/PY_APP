@@ -9,6 +9,8 @@
 #       tkinter
 #       cv2
 #       winsound
+#       BeautifulSoup
+#       psutil
 
 import speech_recognition as sr
 import pyttsx3
@@ -26,10 +28,26 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 import cv2
 import winsound
 import time
+import requests
+from bs4 import BeautifulSoup
+import psutil
 
 listener = sr.Recognizer()
 speak = pyttsx3.init()
+# ==========================================================================================================================
+# math funcations 
 
+def Power():
+    input = input("Enter the Number ::")
+    input2 = input("Enter the power of number ::")
+    return input * input2
+
+def Math_engine():
+        Input_command = input("Enter what you want to search :: ")
+        if("power" in Input_command):
+            Power()
+
+# ==========================================================================================================================
 # funcations 
 def webcam():
     cam = cv2.VideoCapture(0) 
@@ -59,6 +77,44 @@ def camara():
         if cv2.waitKey(10) ==  ord('q'):
             break
         cv2.imshow('Camera',frame1) 
+
+def Scrapper():
+    url = input("Enter URL:: ")
+    print("Just type an HTML tag you want to extract ")
+    print("Eg::p")
+    Tag = input("What do you want to extract :: ")
+
+    response = requests.get(url)
+    html_content = response.content
+
+    soup = BeautifulSoup(html_content , 'lxml')
+    headlines = soup.find_all(Tag)
+
+def Bandwidth():
+    last_recived = psutil.net_io_counters().bytes_recv
+    last_sent = psutil.net_io_counters().bytes_sent
+    last_total =last_recived + last_sent
+
+    while True:
+        bytes_recived = psutil.net_io_counters().bytes_recv
+        bytes_sent = psutil.net_io_counters().bytes_sent
+        bytes_total = bytes_recived + bytes_sent
+
+        new_recived = bytes_recived - last_recived
+        new_sent = bytes_sent - last_sent
+        new_total = bytes_total - last_total
+
+        mb_new_recived = new_recived / 1024 / 1024
+        mb_new_sent = new_sent / 1024 / 1024 
+        mb_new_total = new_total / 1024 / 1024
+
+        print(f"{mb_new_recived:.2f} MB received , {mb_new_sent:.2f} MB sent , {mb_new_total:.2f} MB total")
+
+        last_recived = bytes_recived
+        last_sent = bytes_sent
+        last_total = bytes_total
+
+        time.sleep(1)
 
 print("------------------------Minecraft_App(ignore)--------------------------------------")
 def Minecraft():
@@ -228,7 +284,7 @@ def IDE():
 def commands():
     
     root = tk.Tk()
-    root.title("ALEXA")
+    root.title("ALEXA Commands")
     code_output = Text(height=10 , bg="blue" , fg="lightgreen")
     root.geometry("200x1000")
 
@@ -264,16 +320,8 @@ def talk(text):
 string = strftime('%H:%M %p')
 talk("welcome back sir " + "the time is " + string )
 
-print(""" 
-|\    | |---| |----   |     |           |-----|  |------| 
-| \   | |   | |       |     |           |     |     |
-|  \  | |---| |----|  |-----| #=#=#=#=# |-----|     |
-|   \ | |   |      |  |     |           |     |     |  
-|    \| |   | -----|  |     |           |     |  |------|    
-""")
-
-command = ""
 def start_alexa():
+    command = "" 
     try:
         with sr.Microphone() as source:
             print("listening .....")
@@ -348,6 +396,15 @@ def run_alexa():
     elif "openserver" in command:
         talk("ok sir ")
         subprocess.call("I:\\codeing\\website\\website.bat")
+    elif "search website" in command:
+        talk("ok sir ")
+        Scrapper()
+    elif "monitor bandwidth" in command:
+        talk("ok sir ")
+        Bandwidth()
+    elif "Math engine" in command:
+        talk("ok sir ")
+        Math_engine()
     else:
         talk("sorry sir i did not understand that")
 
