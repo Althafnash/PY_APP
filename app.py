@@ -30,7 +30,7 @@ print("""
         8   -   IDE
         9   -   Image opener
        10   -   Network Bandwidth
-       11   -   We Scrapper
+       11   -   Web Scrapper
 """)
 command = input("What do you want to see ")
 if command == "1":

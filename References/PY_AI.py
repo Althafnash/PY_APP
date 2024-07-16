@@ -22,7 +22,7 @@ import tkinter.ttk as ttk
 from time import strftime
 from tkinter import *
 from tkinter.filedialog import asksaveasfilename, askopenfilename
-import subprocess as sub
+import subprocess 
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 import cv2
@@ -251,7 +251,7 @@ def IDE():
             text.pack()
             return
         command = f'Python {file_path}'
-        process = subprocess.Popen(command, stdout=subprocess.PIPE ,stderr=subprocess.PIPE , shell=True)
+        process = sub.Popen(command, stdout=subprocess.PIPE ,stderr=subprocess.PIPE , shell=True)
         output , error = process.communicate()
         code_output.insert('1.0', output)
         code_output.insert('1.0', error)
